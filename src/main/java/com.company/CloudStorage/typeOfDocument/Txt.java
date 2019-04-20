@@ -1,4 +1,4 @@
-package com.example.CloudStorage.typeOfDocument;
+package com.company.CloudStorage.typeOfDocument;
 
 import javax.persistence.Convert;
 import java.util.UUID;
