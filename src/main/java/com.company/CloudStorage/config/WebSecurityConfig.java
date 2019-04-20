@@ -1,6 +1,6 @@
 package com.company.CloudStorage.config;
 
-import com.example.sweater.service.UserSevice;
+import com.company.CloudStorage.service.UserSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

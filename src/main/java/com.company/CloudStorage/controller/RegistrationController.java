@@ -2,9 +2,9 @@ package com.company.CloudStorage.controller;
 
 
 
-import com.example.sweater.domain.Role;
-import com.example.sweater.domain.User;
-import com.example.sweater.repos.UserRepo;
+import com.company.CloudStorage.domain.Role;
+import com.company.CloudStorage.domain.User;
+import com.company.CloudStorage.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
