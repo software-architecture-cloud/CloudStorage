@@ -1,8 +1,8 @@
 package com.company.CloudStorage.controller;
 
-import com.example.sweater.domain.Message;
-import com.example.sweater.domain.User;
-import com.example.sweater.repos.MessageRepo;
+import com.company.CloudStorage.domain.Message;
+import com.company.CloudStorage.domain.User;
+import com.company.CloudStorage.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

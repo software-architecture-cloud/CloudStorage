@@ -1,6 +1,6 @@
 package com.company.CloudStorage.repos;
 
-import org.apache.catalina.User;
+import com.company.CloudStorage.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepo extends JpaRepository<User, Long> {
