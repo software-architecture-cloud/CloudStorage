@@ -15,6 +15,7 @@ public class Message {
     private String tag;
     private String containsFile;
     private String nameFile;
+    private String typeFile;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -24,10 +25,11 @@ public class Message {
     public Message() {
     }
 
-    public Message(String text, String tag, User user) {
+    public Message(String text, String tag, User user, String typeFile) {
         this.author = user;
         this.text = text;
         this.tag = tag;
+        this.typeFile = typeFile;
     }
 
     public String getAuthorName() {
@@ -82,6 +84,8 @@ public class Message {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getTypeFile() {return typeFile; }
 
     @Override
     public boolean equals(Object o) {
