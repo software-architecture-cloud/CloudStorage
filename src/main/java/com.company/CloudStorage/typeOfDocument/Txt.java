@@ -1,13 +1,11 @@
 package com.company.CloudStorage.typeOfDocument;
 
-import javax.persistence.Convert;
 import java.util.UUID;
 
-public class Txt implements Document {
+public class Txt implements ITextDocument {
 
     private byte[] symbols;
-
-
+    private final String type = "txt";
     private String name;
 
     public Txt(byte[] symbols) {
@@ -17,7 +15,7 @@ public class Txt implements Document {
     @Override
     public String  getUnicName(String originalFilename) {
         String uuidFile = UUID.randomUUID().toString();
-        name = "txt" + uuidFile + "." + originalFilename;
+        name = type + uuidFile + "." + originalFilename;
         return name;
     }
 
@@ -45,8 +43,13 @@ public class Txt implements Document {
     }
 
     @Override
-    public String makeString() {
+    public String showContext() {
         return new String(symbols);
+    }
+
+    @Override
+    public String getTypeFile() {
+        return type;
     }
 
     @Override

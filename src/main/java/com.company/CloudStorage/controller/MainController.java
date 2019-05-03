@@ -3,7 +3,8 @@ package com.company.CloudStorage.controller;
 import com.company.CloudStorage.domain.Message;
 import com.company.CloudStorage.domain.User;
 import com.company.CloudStorage.repos.MessageRepo;
-import com.company.CloudStorage.typeOfDocument.Document;
+import com.company.CloudStorage.typeOfDocument.IFile;
+import com.company.CloudStorage.typeOfDocument.ITextDocument;
 import com.company.CloudStorage.typeOfDocument.Txt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,26 +12,22 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Controller
 public class MainController {
     @Autowired
     private MessageRepo messageRepo;
 
-    private List<Document> documents = new ArrayList<>();
+    private List<IFile> documents = new ArrayList<IFile>();
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -63,7 +60,6 @@ public class MainController {
             @RequestParam String tag, Map<String, Object> model,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
-        Message message = new Message(text, tag, user);
 
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
@@ -72,17 +68,14 @@ public class MainController {
                 uploadDir.mkdir();
             }
 
-            Document document = new Txt(bytes);
+            IFile document = new Txt(bytes);
+            Message message = new Message(text, tag, user, document.getTypeFile());
             documents.add(document);
-
             file.transferTo(new File(uploadPath + "/" + document.getUnicName(file.getOriginalFilename())));
-
-
             message.setNameFile(document.getName());
-            message.setContainsFile(document.makeString());
+            message.setContainsFile((document).showContext());
+            messageRepo.save(message);
         }
-
-        messageRepo.save(message);
 
         Iterable<Message> messages = messageRepo.findAll();
 
