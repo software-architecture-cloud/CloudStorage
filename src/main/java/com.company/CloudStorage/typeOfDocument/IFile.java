@@ -18,4 +18,6 @@ public interface IFile {
     public void deleteAction(Action action);
 
     public List<Action> getListAction();
+
+    public IFile clone(IFile file);
 }

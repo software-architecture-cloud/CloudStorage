@@ -2,6 +2,9 @@ package com.company.CloudStorage.domain;
 
 
 
+import com.company.CloudStorage.typeOfDocument.IFile;
+import com.company.CloudStorage.typeOfDocument.Txt;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -16,14 +19,18 @@ public class Message {
     private String containsFile;
     private String nameFile;
     private String typeFile;
+    @Transient
+    private IFile file;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
 
 
+
     public Message() {
     }
+
 
     public Message(String text, String tag, User user, String typeFile) {
         this.author = user;
@@ -95,4 +102,12 @@ public class Message {
         return Objects.equals(containsFile, message.containsFile);
     }
 
+    public IFile getFile() {
+        return file;
+    }
+
+    public void setFile(IFile file) {
+        if(file.getTypeFile().equals("txt"))
+            this.file = new Txt(((Txt)file).getSymbols());
+    }
 }
