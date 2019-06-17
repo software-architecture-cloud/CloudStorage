@@ -1,6 +1,8 @@
 package com.company.CloudStorage.typeOfDocument;
 
 import com.company.CloudStorage.action.Action;
+import com.company.CloudStorage.action.ResizeImage;
+import com.company.CloudStorage.action.ShowContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +18,24 @@ public class Bmp implements IImageDocument {
     private int newWidth;
     private int newlenght;
 
+    public Bmp() {
+        this.width = 1200;
+        this.lenght = 800;
+        Action resizeImage = new ResizeImage();
+        Action showContext = new ShowContext();
+        listAction = new ArrayList<>();
+        listAction.add(resizeImage);
+        listAction.add(showContext);
+    }
+
     public Bmp(int width, int lenght) {
         this.width = width;
         this.lenght = lenght;
+        Action resizeImage = new ResizeImage();
+        Action showContext = new ShowContext();
+        listAction = new ArrayList<>();
+        listAction.add(resizeImage);
+        listAction.add(showContext);
     }
 
     public Bmp(List<Action> listAction, int width, int lenght) {

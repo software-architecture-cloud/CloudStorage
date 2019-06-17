@@ -49,6 +49,10 @@ public class MainController {
             messages = messageRepo.findAll();
         }
 
+        for (Message element :messages
+        ) {
+            element.setFile();
+        }
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
 
@@ -78,11 +82,16 @@ public class MainController {
             message.setFile(document);
             message.setContainsFile((document).showContext());
             messageRepo.save(message);
-            model.put("actionsfile", message.getFile().getListAction());
+//            model.put("actionsfile", message.getFile().getListAction());
+            Iterable<Message> messages = messageRepo.findAll();
 
         }
 
         Iterable<Message> messages = messageRepo.findAll();
+        for (Message element :messages
+        ) {
+            element.setFile();
+        }
 
         model.put("messages", messages);
 

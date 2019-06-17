@@ -51,13 +51,13 @@
         <button type="submit">Редактировать</button>
     </form>
 
-
-        <#list actionsfile as actionfile>
+        <#list message.file.listAction>
+            <#items as actionfile>
             <button type="submit">${actionfile.nameAction}</button>
+            </#items>
 
         </#list>
         <#--<td th:each="actionfile : ${actionsfile}">-->
-
             <#--<tr><span th:text="${actionfile.nameAction}"> 123 </span></tr>-->
              <#--&lt;#&ndash;<a th:href="@{/main/(nameAction = ${action.getNameAction()})}" >&ndash;&gt;-->
              <#--&lt;#&ndash;<button type="button" class="btn btn-primary" th:text="#{action.getNameAction()}"></button>&ndash;&gt;-->

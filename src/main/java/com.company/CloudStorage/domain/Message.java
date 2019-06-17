@@ -2,6 +2,7 @@ package com.company.CloudStorage.domain;
 
 
 
+import com.company.CloudStorage.typeOfDocument.Bmp;
 import com.company.CloudStorage.typeOfDocument.IFile;
 import com.company.CloudStorage.typeOfDocument.Txt;
 
@@ -21,6 +22,7 @@ public class Message {
     private String typeFile;
     @Transient
     private IFile file;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -109,5 +111,14 @@ public class Message {
     public void setFile(IFile file) {
         if(file.getTypeFile().equals("txt"))
             this.file = new Txt(((Txt)file).getSymbols());
+        else
+            this.file = new Bmp();
+    }
+
+    public void setFile() {
+        if(typeFile.equals("txt"))
+            this.file = new Txt(getContainsFile().getBytes());
+        else
+            this.file = new Bmp();
     }
 }

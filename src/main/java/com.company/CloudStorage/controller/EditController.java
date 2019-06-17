@@ -60,6 +60,7 @@ public class EditController {
                 // File file = new File( uploadPath + "/" + "update"+element.getNameFile());
 
             }
+            element.setFile();
             messageRepo.save(element);
 
         }
