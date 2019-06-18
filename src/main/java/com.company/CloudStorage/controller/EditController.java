@@ -57,6 +57,7 @@ public class EditController {
                 fileFactory.editFile(element);
 
             }
+            element.setFile();
             messageRepo.save(element);
         }
 

@@ -5,4 +5,8 @@ import com.company.CloudStorage.typeOfDocument.IFile;
 public interface Action {
 
     public void doAction(IFile file);
+
+    public String getNameAction();
+
+//    public String getNumberAction();
 }

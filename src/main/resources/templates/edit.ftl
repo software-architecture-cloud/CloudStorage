@@ -10,5 +10,6 @@
     <img src="/img/${messageEdit.getNameFile()}">
     </#if>
     </div>
+
     <button type="submit">Сохранить</button>
 </@c.page>

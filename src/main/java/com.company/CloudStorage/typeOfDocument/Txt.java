@@ -1,6 +1,9 @@
 package com.company.CloudStorage.typeOfDocument;
 
 import com.company.CloudStorage.action.Action;
+import com.company.CloudStorage.action.CountSymbols;
+import com.company.CloudStorage.action.CountWords;
+import com.company.CloudStorage.action.ShowContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,13 @@ public class Txt implements ITextDocument {
 
     public Txt(byte[] symbols) {
         this.symbols = symbols;
+        Action countSymbols = new CountSymbols();
+        Action countWords = new CountWords();
+        Action showContext = new ShowContext();
+        listAction = new ArrayList<>();
+        listAction.add(countSymbols);
+        listAction.add(countWords);
+        listAction.add(showContext);
     }
 
     @Override
@@ -75,6 +85,15 @@ public class Txt implements ITextDocument {
     @Override
     public List<Action> getListAction() {
         return listAction;
+    }
+
+    public byte[] getSymbols() {
+        return symbols;
+    }
+
+    @Override
+    public IFile clone(IFile file) {
+        return new Txt(((Txt)file).getSymbols());
     }
 
     @Override

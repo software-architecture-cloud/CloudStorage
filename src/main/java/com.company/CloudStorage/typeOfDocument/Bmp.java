@@ -1,6 +1,8 @@
 package com.company.CloudStorage.typeOfDocument;
 
 import com.company.CloudStorage.action.Action;
+import com.company.CloudStorage.action.ResizeImage;
+import com.company.CloudStorage.action.ShowContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +18,28 @@ public class Bmp implements IImageDocument {
     private int newWidth;
     private int newlenght;
 
-    public Bmp(String name, int width, int lenght) {
-        this.name = name;
-        this.width = width;
-        this.lenght = lenght;
+    public Bmp() {
+        this.width = 1200;
+        this.lenght = 800;
+        Action resizeImage = new ResizeImage();
+        Action showContext = new ShowContext();
+        listAction = new ArrayList<>();
+        listAction.add(resizeImage);
+        listAction.add(showContext);
     }
 
-    public Bmp(List<Action> listAction, String name, int width, int lenght) {
+    public Bmp(int width, int lenght) {
+        this.width = width;
+        this.lenght = lenght;
+        Action resizeImage = new ResizeImage();
+        Action showContext = new ShowContext();
+        listAction = new ArrayList<>();
+        listAction.add(resizeImage);
+        listAction.add(showContext);
+    }
+
+    public Bmp(List<Action> listAction, int width, int lenght) {
         listAction = new ArrayList<>(listAction);
-        this.name = name;
         this.width = width;
         this.lenght = lenght;
     }
@@ -43,6 +58,7 @@ public class Bmp implements IImageDocument {
 
     @Override
     public String getUnicName(String originalFilename) {
+        name = originalFilename;
         String uuidFile = UUID.randomUUID().toString();
         name = type + uuidFile + "." + originalFilename;
         return name;
@@ -61,6 +77,19 @@ public class Bmp implements IImageDocument {
     @Override
     public List<Action> getListAction() {
         return listAction;
+    }
+
+    @Override
+    public IFile clone(IFile file) {
+        return new Bmp(((Bmp)file).getLenght(), ((Bmp)file).getWidth());
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getLenght() {
+        return lenght;
     }
 
     @Override

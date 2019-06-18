@@ -21,7 +21,7 @@ public class FileFactory {
             return new Txt(file.getBytes());
         }
         if(file.getOriginalFilename().contains(".bmp")){
-            return new Bmp(file.getOriginalFilename(), 800, 600);}
+            return new Bmp();}
         return null;
     }
 
