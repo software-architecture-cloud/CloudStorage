@@ -7,14 +7,28 @@ public class ResizeImage implements Action{
 
     private String nameAction = "ResizeImage";
 
+    private String description = "New size of image :";
+
     @Override
     public void doAction(IFile file) {
-        IImageDocument fileText = (IImageDocument)file;
-        fileText.resize();
+        IImageDocument filePicture = (IImageDocument)file;
+        filePicture.resize();
     }
 
     @Override
     public String getNameAction() {
         return nameAction;
+    }
+
+    @Override
+    public String getDescriptionAction() {
+        return description;
+    }
+
+    @Override
+    public String resultAction(IFile file) {
+        IImageDocument filePicture = (IImageDocument)file;
+        filePicture.resize();
+        return "New size of file : "+ filePicture.getLenght() +":"+filePicture.getWidth();
     }
 }

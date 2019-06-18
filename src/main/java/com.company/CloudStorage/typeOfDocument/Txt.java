@@ -46,20 +46,18 @@ public class Txt implements ITextDocument {
 
     @Override
     public int countWords() {
-        char[] sentence = symbols.toString().toCharArray();
-        boolean inWord = false;
-        int wordCt = 0;
-        for (char c : sentence) {
-            if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
-                if (!inWord) {
-                    wordCt++;
-                    inWord = true;
+        String sentence = new String(symbols);
+        int count = 0;
+
+        if(sentence.length() != 0){
+            count++;
+            for (int i = 0; i < sentence.length(); i++) {
+                if(sentence.charAt(i) == ' '){
+                    count++;
                 }
-            } else {
-                inWord = false;
             }
         }
-        return wordCt;
+        return count;
     }
 
     @Override
