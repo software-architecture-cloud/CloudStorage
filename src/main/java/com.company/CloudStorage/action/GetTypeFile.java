@@ -6,6 +6,8 @@ public class GetTypeFile implements Action {
 
     private String nameAction = "GetTypeFile";
 
+    private String description = "Type of this file :";
+
     @Override
     public void doAction(IFile file) {
         file.getTypeFile();
@@ -14,5 +16,15 @@ public class GetTypeFile implements Action {
     @Override
     public String getNameAction() {
         return nameAction;
+    }
+
+    @Override
+    public String getDescriptionAction() {
+        return description;
+    }
+
+    @Override
+    public String resultAction(IFile file) {
+        return file.getTypeFile();
     }
 }

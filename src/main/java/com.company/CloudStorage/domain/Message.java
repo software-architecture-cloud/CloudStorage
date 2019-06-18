@@ -121,4 +121,12 @@ public class Message {
         else
             this.file = new Bmp();
     }
+
+    public Message clone (Message message){
+        Message cloneMessage = new Message(message.text,message.tag,message.author,message.typeFile);
+        cloneMessage.setNameFile(message.file.getName());
+        cloneMessage.setFile(message.file);
+        cloneMessage.setContainsFile((message.file).showContext());
+        return cloneMessage;
+    }
 }

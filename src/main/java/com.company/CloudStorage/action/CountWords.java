@@ -7,6 +7,8 @@ public class CountWords implements Action {
 
     private String nameAction = "CountWords";
 
+    private String description = "Count words of this file :";
+
     @Override
     public void doAction(IFile file) {
         ITextDocument fileText = (ITextDocument)file;
@@ -16,5 +18,16 @@ public class CountWords implements Action {
     @Override
     public String getNameAction() {
         return nameAction;
+    }
+
+    @Override
+    public String getDescriptionAction() {
+        return description;
+    }
+
+    @Override
+    public String resultAction(IFile file) {
+        ITextDocument fileText = (ITextDocument)file;
+        return String.valueOf(fileText.countWords());
     }
 }

@@ -6,6 +6,8 @@ public class ShowContext implements Action {
 
     private String nameAction = "ShowContext";
 
+    private String description = "Context of this file : ";
+
     @Override
     public void doAction(IFile file) {
         file.showContext();
@@ -14,5 +16,15 @@ public class ShowContext implements Action {
     @Override
     public String getNameAction() {
         return nameAction;
+    }
+
+    @Override
+    public String getDescriptionAction() {
+        return description;
+    }
+
+    @Override
+    public String resultAction(IFile file) {
+        return file.showContext();
     }
 }

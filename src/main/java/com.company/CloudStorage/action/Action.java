@@ -8,5 +8,7 @@ public interface Action {
 
     public String getNameAction();
 
-//    public String getNumberAction();
+    public String getDescriptionAction();
+
+    public String resultAction(IFile file);
 }

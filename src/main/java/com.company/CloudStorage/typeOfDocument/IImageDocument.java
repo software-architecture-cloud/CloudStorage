@@ -6,4 +6,8 @@ public interface IImageDocument extends IFile {
 
     public void setNewSize(int width, int lenght);
 
+    public int getWidth();
+
+    public int getLenght();
+
 }

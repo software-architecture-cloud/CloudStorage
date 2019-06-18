@@ -15,8 +15,8 @@ public class Bmp implements IImageDocument {
     private String name;
     private int width;
     private int lenght;
-    private int newWidth;
-    private int newlenght;
+    private int newWidth=1000;
+    private int newlenght=700;
 
     public Bmp() {
         this.width = 1200;
