@@ -3,6 +3,7 @@ package com.company.CloudStorage.controller;
 import com.company.CloudStorage.domain.Message;
 import com.company.CloudStorage.domain.User;
 import com.company.CloudStorage.repos.MessageRepo;
+import com.company.CloudStorage.typeOfDocument.FileFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,7 +28,7 @@ public class EditController {
 
     @Value("${upload.path}")
     private String uploadPath;
-
+    private FileFactory fileFactory = new FileFactory();
     private String tempNameFile;
 
 
@@ -49,20 +50,15 @@ public class EditController {
 
         Iterable<Message> messages = messageRepo.findAll() ;
         messageRepo.deleteAll();
-
         for (Message element:messages
         ) {
             if(element.getContainsFile().equals(tempNameFile)) {
                 element.setContainsFile(editFile);
-                PrintWriter writer = new PrintWriter(uploadPath + "/" + "update"+element.getNameFile(), "UTF-8");
-                writer.println(element.getContainsFile());
-                writer.close();
-                // File file = new File( uploadPath + "/" + "update"+element.getNameFile());
+                fileFactory.editFile(element);
 
             }
             element.setFile();
             messageRepo.save(element);
-
         }
 
         return "redirect:/main";

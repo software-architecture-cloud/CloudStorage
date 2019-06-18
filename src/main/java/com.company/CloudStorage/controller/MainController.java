@@ -4,6 +4,7 @@ import com.company.CloudStorage.action.Action;
 import com.company.CloudStorage.domain.Message;
 import com.company.CloudStorage.domain.User;
 import com.company.CloudStorage.repos.MessageRepo;
+import com.company.CloudStorage.typeOfDocument.FileFactory;
 import com.company.CloudStorage.typeOfDocument.IFile;
 import com.company.CloudStorage.typeOfDocument.ITextDocument;
 import com.company.CloudStorage.typeOfDocument.Txt;
@@ -29,10 +30,10 @@ public class MainController {
     @Autowired
     private MessageRepo messageRepo;
 
-    private List<IFile> documents = new ArrayList<IFile>();
-
     @Value("${upload.path}")
     private String uploadPath;
+
+    private FileFactory fileFactory = new FileFactory();
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
@@ -69,22 +70,17 @@ public class MainController {
 
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
-            byte[] bytes = file.getBytes();
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
 
-            IFile document = new Txt(bytes);
+            IFile document = fileFactory.initialize(file);
             Message message = new Message(text, tag, user, document.getTypeFile());
-            documents.add(document);
             file.transferTo(new File(uploadPath + "/" + document.getUnicName(file.getOriginalFilename())));
             message.setNameFile(document.getName());
             message.setFile(document);
             message.setContainsFile((document).showContext());
             messageRepo.save(message);
-//            model.put("actionsfile", message.getFile().getListAction());
-            Iterable<Message> messages = messageRepo.findAll();
-
         }
 
         Iterable<Message> messages = messageRepo.findAll();
