@@ -1,3 +1,17 @@
 body {
     color: #113;
+    background-image: url("https://zabavnik.club/wp-content/uploads/2018/04/Pictures_with_a_green_background_1_17070842.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+.messages-item{
+    margin: 10px 0;
+    /*border:  1px solid #555;*/
+    padding: 20px;
+    background: #fafafa;
+    -webkit-box-shadow: 10px 10px 49px -6px rgba(0,0,0,0.37);
+    -moz-box-shadow: 10px 10px 49px -6px rgba(0,0,0,0.37);
+    box-shadow: 10px 10px 49px -6px rgba(0,0,0,0.37);
 }
