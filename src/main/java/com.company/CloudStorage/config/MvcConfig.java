@@ -21,5 +21,18 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:///" + uploadPath + "/");
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/jquery/**") //
+                .addResourceLocations("classpath:/META-INF/resources/webjars/jquery/3.3.1-1/");
+        //
+        // http://somedomain/SomeContextPath/popper/popper.min.js
+        //
+        registry.addResourceHandler("/popper/**") //
+                .addResourceLocations("classpath:/META-INF/resources/webjars/popper.js/1.14.1/umd/");
+
+        // http://somedomain/SomeContextPath/bootstrap/css/bootstrap.min.css
+        // http://somedomain/SomeContextPath/bootstrap/js/bootstrap.min.js
+        //
+        registry.addResourceHandler("/bootstrap/**") //
+                .addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/4.1.1/");
     }
 }
