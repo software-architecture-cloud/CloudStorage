@@ -3,8 +3,7 @@ package com.company.CloudStorage.controller;
 import com.company.CloudStorage.domain.Message;
 import com.company.CloudStorage.domain.User;
 import com.company.CloudStorage.repos.MessageRepo;
-import com.company.CloudStorage.typeOfDocument.FileFactory;
-import com.company.CloudStorage.typeOfDocument.IFile;
+import com.company.CloudStorage.typeOfDocument.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,7 +26,7 @@ public class MainController {
     @Value("${upload.path}")
     private String uploadPath;
 
-    private FileFactory fileFactory = new FileFactory();
+    private FileRealization fileRealization = new FileRealization();
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
@@ -67,8 +66,13 @@ public class MainController {
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
-
-            IFile document = fileFactory.initialize(file);
+            FileBuilder fileBuilder;
+            if(file.getOriginalFilename().contains(".txt"))
+                fileBuilder = new TextBuilder();
+            else
+                fileBuilder = new BmpBuilder();
+            fileRealization.setFileBuilder(fileBuilder);
+            IFile document = fileRealization.initialize(file);
             Message message = new Message(text, tag, user, document.getTypeFile());
             file.transferTo(new File(uploadPath + "/" + document.getUnicName(file.getOriginalFilename())));
             message.setNameFile(document.getName());

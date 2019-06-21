@@ -2,7 +2,7 @@ package com.company.CloudStorage.controller;
 
 import com.company.CloudStorage.domain.Message;
 import com.company.CloudStorage.repos.MessageRepo;
-import com.company.CloudStorage.typeOfDocument.FileFactory;
+import com.company.CloudStorage.typeOfDocument.FileRealization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class EditController {
 
     @Value("${upload.path}")
     private String uploadPath;
-    private FileFactory fileFactory = new FileFactory();
+    private FileRealization fileRealization = new FileRealization();
     private String tempNameFile;
 
 
@@ -48,7 +48,7 @@ public class EditController {
         ) {
             if(element.getContainsFile().equals(tempNameFile)) {
                 element.setContainsFile(editFile);
-                fileFactory.editFile(element);
+                fileRealization.editFile(element);
 
             }
             element.setFile();
